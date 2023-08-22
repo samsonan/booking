@@ -1,0 +1,6 @@
+spring:
+    codec:
+        max-in-memory-size: 500KB
+
+web-client:
+    response-timeout-ms: 10000
