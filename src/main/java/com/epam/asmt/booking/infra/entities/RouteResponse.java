@@ -1,6 +1,6 @@
-package com.epam.asmt.booking.infra.web.dto;
+package com.epam.asmt.booking.infra.entities;
 
-public record Route(
+public record RouteResponse(
         String airline,
         String sourceAirport,
         String destinationAirport,
