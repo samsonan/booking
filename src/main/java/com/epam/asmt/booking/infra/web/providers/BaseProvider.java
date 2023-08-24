@@ -1,5 +1,7 @@
 package com.epam.asmt.booking.infra.web.providers;
 
+import com.epam.asmt.booking.domain.exception.RemoteServiceException;
+import com.epam.asmt.booking.domain.models.Provider;
 import com.epam.asmt.booking.domain.models.Route;
 import com.epam.asmt.booking.domain.ports.ProviderPort;
 import com.epam.asmt.booking.infra.entities.RouteMapper;
@@ -21,7 +23,7 @@ public class BaseProvider implements ProviderPort {
     private final WebClient providerWebClient;
     private final RouteMapper mapper;
     private final String requestPath;
-    private final String providerName;
+    private final Provider provider;
 
     public Set<Route> fetchAllRoutes() {
         try {
@@ -35,8 +37,14 @@ public class BaseProvider implements ProviderPort {
             return routes == null ? Collections.emptySet() :
                     routes.stream().map(mapper::toDomainEntity).collect(Collectors.toSet());
         } catch (Exception ex) {
-            log.error("Failed to get routes from [{}]: {}", providerName, ex.getMessage());
-            return Collections.emptySet();
+            throw new RemoteServiceException("Failed to get routes from [%s]: %s".formatted(provider.getKey(), ex.getMessage()));
         }
     }
+
+    @Override
+    public Provider getProvider() {
+        return provider;
+    }
+
+
 }

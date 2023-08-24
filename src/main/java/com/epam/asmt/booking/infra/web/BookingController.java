@@ -5,6 +5,7 @@ import com.epam.asmt.booking.infra.entities.RouteMapper;
 import com.epam.asmt.booking.infra.entities.RouteResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Set;
@@ -18,8 +19,9 @@ public class BookingController {
     private final RouteMapper mapper;
 
     @GetMapping("routes")
-    public Set<RouteResponse> routeList() {
-        return storagePort.fetchDistinct().stream()
+    public Set<RouteResponse> routes(@RequestParam(name = "from", required = false) String fromAirport,
+                                     @RequestParam(name = "to", required = false) String toAirport) {
+        return storagePort.fetchDistinct(fromAirport, toAirport).stream()
                 .map(mapper::toResponse)
                 .collect(Collectors.toSet());
     }

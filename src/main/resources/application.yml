@@ -4,9 +4,19 @@ spring:
     data:
         mongodb:
             auto-index-creation: true
+
+    redis:
+        host: ${CACHE_HOST:localhost}
+        port: ${CACHE_PORT:6379}
+        lettuce.pool:
+            min-idle: 5
+            max-idle: 10
+            max-active: 20
+
 web-client:
     response-timeout-ms: 10000
 
 providers:
-    provider1: "https://zretmlbsszmm4i35zrihcflchm0ktwwj.lambda-url.eu-central-1.on.aws/provider/flights1"
-    provider2: "https://zretmlbsszmm4i35zrihcflchm0ktwwj.lambda-url.eu-central-1.on.aws/provider/flights3"
+    fetch-delay-ms: 10000
+    provider1: ${PROVIDER_1_URL:https://zretmlbsszmm4i35zrihcflchm0ktwwj.lambda-url.eu-central-1.on.aws/provider/flights1}
+    provider2: ${PROVIDER_2_URL:https://zretmlbsszmm4i35zrihcflchm0ktwwj.lambda-url.eu-central-1.on.aws/provider/flights2}
