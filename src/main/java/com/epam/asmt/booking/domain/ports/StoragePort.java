@@ -8,7 +8,10 @@ import java.util.Set;
 
 public interface StoragePort {
 
+    /**
+     * Save the routes of given provider into some storage.
+     */
     void saveProviderRoutes(Provider provider, Set<Route> routes);
 
-    Set<Route> fetchDistinct(@Nullable String fromAirport, @Nullable String toAirport);
+    Set<Route> fetchDistinctRoutes(@Nullable String fromAirport, @Nullable String toAirport);
 }

@@ -23,8 +23,7 @@ public class RoutesUpdateService {
         log.debug("Updating routes from providers: {}", provider);
         provider.forEach(p -> {
             try {
-                var routes = p.fetchAllRoutes();
-                storagePort.saveProviderRoutes(p.getProvider(), routes);
+                storagePort.saveProviderRoutes(p.getProvider(), p.fetchAllRoutes());
             } catch (RemoteServiceException e) {
                 log.error("Error fetching routes: {}", e.getMessage());
             }

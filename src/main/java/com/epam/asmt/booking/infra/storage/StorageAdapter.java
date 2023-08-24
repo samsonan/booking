@@ -27,7 +27,7 @@ public class StorageAdapter implements StoragePort {
     }
 
     @Override
-    public Set<Route> fetchDistinct(@Nullable String fromAirport, @Nullable String toAirport) {
+    public Set<Route> fetchDistinctRoutes(@Nullable String fromAirport, @Nullable String toAirport) {
         return pool.submit(() -> Arrays.stream(Provider.values())
                 .parallel()
                 .flatMap(p -> routesRepo.getProviderRoutes(p).stream())

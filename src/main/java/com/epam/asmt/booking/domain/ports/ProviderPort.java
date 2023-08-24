@@ -12,5 +12,8 @@ public interface ProviderPort {
      */
     Set<Route> fetchAllRoutes();
 
+    /**
+     * @return current provider
+     */
     Provider getProvider();
 }

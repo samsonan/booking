@@ -21,7 +21,7 @@ public class BookingController {
     @GetMapping("routes")
     public Set<RouteResponse> routes(@RequestParam(name = "from", required = false) String fromAirport,
                                      @RequestParam(name = "to", required = false) String toAirport) {
-        return storagePort.fetchDistinct(fromAirport, toAirport).stream()
+        return storagePort.fetchDistinctRoutes(fromAirport, toAirport).stream()
                 .map(mapper::toResponse)
                 .collect(Collectors.toSet());
     }
