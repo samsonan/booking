@@ -10,6 +10,7 @@ version = '0.0.1-SNAPSHOT'
 ext {
     lombokMapstructVersion = '0.2.0'
     mapstructVersion = '1.5.2.Final'
+    mockServerVersion = '4.10.0'
 }
 
 java {
@@ -47,7 +48,13 @@ dependencies {
             "org.mapstruct:mapstruct-processor:$mapstructVersion",
             "org.projectlombok:lombok-mapstruct-binding:$lombokMapstructVersion"
     )
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation (
+            'org.springframework.boot:spring-boot-starter-test',
+            'org.testcontainers:testcontainers:1.19.0',
+            "com.squareup.okhttp3:okhttp:$mockServerVersion",
+            "com.squareup.okhttp3:mockwebserver:$mockServerVersion"
+    )
+
 }
 
 tasks.named('test') {
